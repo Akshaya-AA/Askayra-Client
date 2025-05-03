@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Askayra-Client/static/css/main.8cd08438.css",
-    "main.js": "/Askayra-Client/static/js/main.5e83e5c9.js",
+    "main.js": "/Askayra-Client/static/js/main.10945940.js",
     "static/media/waxing.png": "/Askayra-Client/static/media/waxing.d2818c786ae5bd828bb4.png",
     "static/media/serhaircolour.jpg": "/Askayra-Client/static/media/serhaircolour.d2386e7220d47601c4ec.jpg",
     "static/media/sermehandi.jpg": "/Askayra-Client/static/media/sermehandi.bc5efa6864e47521500e.jpg",
@@ -69,10 +69,10 @@
     "static/media/serbridal.webp": "/Askayra-Client/static/media/serbridal.d7007060f6503a211dab.webp",
     "index.html": "/Askayra-Client/index.html",
     "main.8cd08438.css.map": "/Askayra-Client/static/css/main.8cd08438.css.map",
-    "main.5e83e5c9.js.map": "/Askayra-Client/static/js/main.5e83e5c9.js.map"
+    "main.10945940.js.map": "/Askayra-Client/static/js/main.10945940.js.map"
   },
   "entrypoints": [
     "static/css/main.8cd08438.css",
-    "static/js/main.5e83e5c9.js"
+    "static/js/main.10945940.js"
   ]
 }
