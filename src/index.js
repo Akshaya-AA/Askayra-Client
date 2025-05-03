@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import {HashRouter,Routes,Route} from 'react-router-dom';
 import Layout from'./Pages/Layout';
 import Home from'./Pages/Home';
 import About from'./Pages/About';
@@ -16,7 +16,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function App(){
   return(
-    <BrowserRouter>
+    <HashRouter>
     <Routes>
       <Route path="/" element={<Layout/>}>
       <Route index element={<Home/>}/>
@@ -29,7 +29,7 @@ export default function App(){
       <Route path="contact" element={<Contact/>}/>      
       </Route>
     </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 const r1=ReactDOM.createRoot(document.getElementById('root'))
