@@ -1,17 +1,40 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import Layout from'./Pages/Layout';
+import Home from'./Pages/Home';
+import About from'./Pages/About';
+import Contact from'./Pages/Contact';
+import FAQ from'./Pages/FAQ';
+import Gallery from'./Pages/Gallery';
+import Services from'./Pages/Services';
+import Testimonials from'./Pages/Testimonials';
+import Booking from './Pages/Booking';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+export default function App(){
+  return(
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout/>}>
+      <Route index element={<Home/>}/>
+      <Route path="About" element={<About/>}/>
+      <Route path="Gallery" element={<Gallery/>}/>
+      <Route path="Services" element={<Services/>}/>
+      <Route path="Testimonials" element={<Testimonials/>}/>
+      <Route path="Booking" element={<Booking/>}/>
+      <Route path="FAQ" element={<FAQ/>}/>
+      <Route path="contact" element={<Contact/>}/>      
+      </Route>
+    </Routes>
+    </BrowserRouter>
+  )
+}
+const r1=ReactDOM.createRoot(document.getElementById('root'))
+r1.render(<App/>)
+
+
+
+

@@ -1,0 +1,118 @@
+.faq-container {
+    padding: 3rem 1rem;
+    background: linear-gradient(to right, #fff1f8, #f7e6ff);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .faq-banner {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .faq-banner h2 {
+    font-size: 2.5rem;
+    color: #922cc4;
+    margin-bottom: 0.5rem;
+  }
+  
+  .faq-banner p {
+    color: #6a4a7b;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  
+  .faq-category {
+    margin: 2rem 0;
+    padding: 1rem;
+  }
+  
+  .faq-category-title {
+    font-size: 1.5rem;
+    color: #7e3ff2;
+    margin-bottom: 1rem;
+    border-left: 4px solid #c084fc;
+    padding-left: 1rem;
+  }
+  
+  .faq-item {
+    background: #fff;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+  }
+  
+  .faq-question {
+    padding: 1rem 1.2rem;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+  }
+  
+  .faq-icon {
+    font-size: 1.2rem;
+    color: #922cc4;
+  }
+  
+  .faq-answer {
+    padding: 0 1.2rem 1rem;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .faq-cta {
+    text-align: center;
+    background: #fff;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    animation: pulse 2s infinite alternate;
+  }
+  
+  .faq-cta h3 {
+    color: #7e3ff2;
+    margin-bottom: 0.5rem;
+  }
+  
+  .faq-cta p {
+    margin-bottom: 1.2rem;
+    color: #555;
+  }
+  
+  .faq-cta button {
+    background: #7e3ff2;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .faq-cta button:hover {
+    background: #651fd1;
+  }
+  
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+  }
+  
+  @media (max-width: 768px) {
+    .faq-banner h2 {
+      font-size: 2rem;
+    }
+  
+    .faq-category-title {
+      font-size: 1.2rem;
+    }
+  
+    .faq-question {
+      font-size: 0.95rem;
+    }
+  }
+  

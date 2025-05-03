@@ -1,0 +1,100 @@
+.contact-section {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.contact-heading {
+  text-align: center;
+  color: #8e44ad;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 10px;
+  top: 16px;
+  color: #8e44ad;
+  font-size: 16px;
+}
+
+.input-icon input,
+.input-icon textarea {
+  width: 100%;
+  padding-left: 35px; 
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+.input-icon textarea {
+  resize: vertical;
+  height: 100px;
+  padding-top: 12px; 
+}
+
+.send-btn {
+  background-color: #8e44ad;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contact-icons a {
+  color: #8e44ad;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.contact-icons i {
+  margin-right: 8px;
+}
+
+input[type="text"]:valid,
+input[type="email"]:valid,
+textarea:valid {
+  color: green;
+}
+
+input[type="text"]:invalid,
+input[type="email"]:invalid,
+textarea:invalid {
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-icons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .send-btn {
+    width: 100%;
+  }
+}
