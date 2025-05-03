@@ -38,7 +38,7 @@ const Booking = () => {
   };
 
   const fetchBookings = async () => {
-    const res = await fetch('http://localhost:5000/api/bookings');
+    const res = await fetch('https://askayra-server.onrender.com/api/bookings');
     const data = await res.json();
     setBookings(data);
   };
@@ -48,8 +48,8 @@ const Booking = () => {
     if (!validateForm()) return;
 
     const url = editingId
-      ? `http://localhost:5000/api/bookings/${editingId}`
-      : 'http://localhost:5000/api/bookings';
+      ? `https://askayra-server.onrender.com/api/bookings/${editingId}`
+      : 'https://askayra-server.onrender.com/api/bookings';
     const method = editingId ? 'PUT' : 'POST';
 
     const res = await fetch(url, {
@@ -76,7 +76,7 @@ const Booking = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this booking?')) return;
-    const res = await fetch(`http://localhost:5000/api/bookings/${id}`, { method: 'DELETE' });
+    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}`, { method: 'DELETE' });
     if (res.ok) fetchBookings();
   };
 
