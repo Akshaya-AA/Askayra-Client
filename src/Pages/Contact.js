@@ -6,22 +6,23 @@ const Contact = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
-    e.preventDefault();
+    console.log(form.current); // ✅ This is fine here, after form has mounted
 
     emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      "service_b55tvbe",
+      "template_vz8oysu",
       form.current,
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      "Ecjfhn_RhL7D6vadf"
     )
     .then((result) => {
       console.log(result.text);
       alert('Message sent successfully! ✨');
     }, (error) => {
-      console.log(error.text);
+      console.log(error);
       alert('Failed to send message 😢');
     });
-
+    
+    e.preventDefault();
     e.target.reset();
   };
 

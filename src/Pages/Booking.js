@@ -23,8 +23,8 @@ const Booking = () => {
   const validateForm = () => {
     let temp = {};
     const nameRx = /^[A-Za-z\s]+$/;
-    const emailRx = /[a-z0-9._%+-]+@[a-z0-9.-]+\[a-z]{2,}$/;
-    const phoneRx = /^[7-9]{1}[0-9]{9}/
+    const emailRx = /^[a-z0-9._%+-]+@gmail\.com$/;
+    const phoneRx = /^[7-9]{1}[0-9]{9}$/;
 
     if (!booking.name || !nameRx.test(booking.name)) temp.name = 'Enter a valid name';
     if (!booking.email || !emailRx.test(booking.email)) temp.email = 'Enter a valid @gmail.com email';
@@ -38,7 +38,7 @@ const Booking = () => {
   };
 
   const fetchBookings = async () => {
-    const res = await fetch('http://localhost:5000/api/bookings');
+    const res = await fetch('https://askayra-server.onrender.com/api/bookings');
     const data = await res.json();
     setBookings(data);
   };
@@ -48,8 +48,8 @@ const Booking = () => {
     if (!validateForm()) return;
 
     const url = editingId
-      ? `http://localhost:5000/api/bookings/${editingId}`
-      : 'http://localhost:5000/api/bookings';
+      ? `https://askayra-server.onrender.com/api/bookings/${editingId}`
+      : 'https://askayra-server.onrender.com/api/bookings';
     const method = editingId ? 'PUT' : 'POST';
 
     const res = await fetch(url, {
@@ -76,7 +76,7 @@ const Booking = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this booking?')) return;
-    const res = await fetch(`http://localhost:5000/api/bookings/${id}`, { method: 'DELETE' });
+    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}`, { method: 'DELETE' });
     if (res.ok) fetchBookings();
   };
 
@@ -104,7 +104,6 @@ const Booking = () => {
           minLength={3}
           onChange={handleChange}
           className={getClass('name')}
-
         />
         {errors.name && <div className="error-text">{errors.name}</div>}
 
@@ -112,6 +111,7 @@ const Booking = () => {
           name="email"
           type="email"
           placeholder="Your Email"
+          pattern="[a-z0-9._%+-]+@gmail\.com$"
           value={booking.email}
           required
           onChange={handleChange}
@@ -131,23 +131,22 @@ const Booking = () => {
         {errors.phone && <div className="error-text">{errors.phone}</div>}
 
         <select
-  name="service"
-  value={booking.service}
-  onChange={(e) => {
-    handleChange(e);
-    e.target.style.color = e.target.value ? 'green' : 'gray';
-  }}
-  className={getClass('service')}
-  style={{ color: booking.service ? 'green' : 'gray' }} 
->
-  <option value="">Select Service</option>
-  <option>Hair Styling</option>
-  <option>Bridal Makeup</option>
-  <option>Facial Glow</option>
-  <option>Spa Moments</option>
-</select>
-
-{errors.service && <div className="error-text">{errors.service}</div>}
+          name="service"
+          value={booking.service}
+          onChange={(e) => {
+            handleChange(e);
+            e.target.style.color = e.target.value ? 'green' : 'gray';
+          }}
+          className={getClass('service')}
+          style={{ color: booking.service ? 'green' : 'gray' }}
+        >
+          <option value="">Select Service</option>
+          <option>Hair Styling</option>
+          <option>Bridal Makeup</option>
+          <option>Facial Glow</option>
+          <option>Spa Moments</option>
+        </select>
+        {errors.service && <div className="error-text">{errors.service}</div>}
 
         <input
           name="date"
@@ -160,7 +159,7 @@ const Booking = () => {
             handleChange(e);
             e.target.style.color = e.target.value ? 'green' : 'gray';
           }}
-          style={{ color: booking.date ? 'green' : 'gray' }} 
+          style={{ color: booking.date ? 'green' : 'gray' }}
           className={getClass('date')}
         />
         {errors.date && <div className="error-text">{errors.date}</div>}
@@ -174,7 +173,7 @@ const Booking = () => {
             e.target.style.color = e.target.value ? 'green' : 'gray';
           }}
           className={getClass('time')}
-          style={{ color: booking.time ? 'green' : 'gray' }} 
+          style={{ color: booking.time ? 'green' : 'gray' }}
         />
         {errors.time && <div className="error-text">{errors.time}</div>}
 
