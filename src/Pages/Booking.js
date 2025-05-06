@@ -10,19 +10,17 @@ const Booking = () => {
     date: '',
     time: ''
   });
+
   const [bookings, setBookings] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [errors, setErrors] = useState({});
-  const [password, setPassword] = useState('');  
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBooking({ ...booking, [name]: value });
     setErrors({ ...errors, [name]: '' });
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
   };
 
   const validateForm = () => {
@@ -81,15 +79,14 @@ const Booking = () => {
 
   const handleDelete = async (id) => {
     const confirmPassword = window.prompt("Enter admin password to delete booking:");
-  
     if (!confirmPassword) return;
-  
+
     const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: confirmPassword }) // ✅ send in body!
+      body: JSON.stringify({ password: confirmPassword })
     });
-  
+
     if (res.ok) {
       fetchBookings();
       alert("Booking deleted successfully.");
@@ -97,11 +94,6 @@ const Booking = () => {
       alert("Invalid password or error deleting booking.");
     }
   };
-  
-
-  useEffect(() => {
-    fetchBookings();
-  }, []);
 
   const getClass = (f) => {
     if (errors[f]) return 'error';
@@ -109,56 +101,44 @@ const Booking = () => {
     return '';
   };
 
+  const handleAdminLogin = () => {
+    if (adminPassword === 'askayra830') {
+      setIsAdmin(true);
+      fetchBookings();
+    } else {
+      alert('Invalid admin password');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAdmin(false);
+    setAdminPassword('');
+    setBookings([]);
+    setBooking({ name: '', email: '', phone: '', service: '', date: '', time: '' });
+    setEditingId(null);
+  };
+
   return (
     <section className="booking-section">
       <h2>Book Your Appointment</h2>
 
       <form className="booking-form" onSubmit={handleSubmit} noValidate>
-        <input
-          name="name"
-          type="text"
-          placeholder="Your Name"
-          value={booking.name}
-          required
-          minLength={3}
-          onChange={handleChange}
-          className={getClass('name')}
-        />
+        <input name="name" type="text" placeholder="Your Name" value={booking.name} required minLength={3}
+          onChange={handleChange} className={getClass('name')} />
         {errors.name && <div className="error-text">{errors.name}</div>}
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Your Email"
-          pattern="[a-z0-9._%+-]+@gmail\.com$"
-          value={booking.email}
-          required
-          onChange={handleChange}
-          className={getClass('email')}
-        />
+        <input name="email" type="email" placeholder="Your Email" pattern="[a-z0-9._%+-]+@gmail\.com$"
+          value={booking.email} required onChange={handleChange} className={getClass('email')} />
         {errors.email && <div className="error-text">{errors.email}</div>}
 
-        <input
-          name="phone"
-          type="tel"
-          placeholder="Your Phone Number"
-          value={booking.phone}
-          maxLength={10}
-          onChange={handleChange}
-          className={getClass('phone')}
-        />
+        <input name="phone" type="tel" placeholder="Your Phone Number" value={booking.phone} maxLength={10}
+          onChange={handleChange} className={getClass('phone')} />
         {errors.phone && <div className="error-text">{errors.phone}</div>}
 
-        <select
-          name="service"
-          value={booking.service}
-          onChange={(e) => {
-            handleChange(e);
-            e.target.style.color = e.target.value ? 'green' : 'gray';
-          }}
-          className={getClass('service')}
-          style={{ color: booking.service ? 'green' : 'gray' }}
-        >
+        <select name="service" value={booking.service} onChange={(e) => {
+          handleChange(e);
+          e.target.style.color = e.target.value ? 'green' : 'gray';
+        }} className={getClass('service')} style={{ color: booking.service ? 'green' : 'gray' }}>
           <option value="">Select Service</option>
           <option>Hair Styling</option>
           <option>Bridal Makeup</option>
@@ -167,33 +147,18 @@ const Booking = () => {
         </select>
         {errors.service && <div className="error-text">{errors.service}</div>}
 
-        <input
-          name="date"
-          type="date"
-          value={booking.date}
-          min="2025-01-03"
-          max="2030-12-31"
-          required
+        <input name="date" type="date" value={booking.date} min="2025-01-03" max="2030-12-31" required
           onChange={(e) => {
             handleChange(e);
             e.target.style.color = e.target.value ? 'green' : 'gray';
-          }}
-          style={{ color: booking.date ? 'green' : 'gray' }}
-          className={getClass('date')}
-        />
+          }} style={{ color: booking.date ? 'green' : 'gray' }} className={getClass('date')} />
         {errors.date && <div className="error-text">{errors.date}</div>}
 
-        <input
-          name="time"
-          type="time"
-          value={booking.time}
+        <input name="time" type="time" value={booking.time}
           onChange={(e) => {
             handleChange(e);
             e.target.style.color = e.target.value ? 'green' : 'gray';
-          }}
-          className={getClass('time')}
-          style={{ color: booking.time ? 'green' : 'gray' }}
-        />
+          }} className={getClass('time')} style={{ color: booking.time ? 'green' : 'gray' }} />
         {errors.time && <div className="error-text">{errors.time}</div>}
 
         <button type="submit" className="submit-btn">
@@ -201,36 +166,58 @@ const Booking = () => {
         </button>
       </form>
 
-      <h3>📋 All Bookings</h3>
-      <table className="booking-table">
-        <thead>
-          <tr>
-            <th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Date</th><th>Time</th><th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map((b) => (
-            <tr key={b._id}>
-              <td data-label="Name">{b.name}</td>
-              <td data-label="Email">{b.email}</td>
-              <td data-label="Phone">{b.phone}</td>
-              <td data-label="Service">{b.service}</td>
-              <td data-label="Date">{b.date}</td>
-              <td data-label="Time">{b.time}</td>
-              <td data-label="Actions" className="actions">
-                <button className="action-btn edit" onClick={() => handleEdit(b)} title="Edit">
-                  <i className="fas fa-edit"></i>
-                </button>
-                <button className="action-btn delete" onClick={() => handleDelete(b._id)} title="Delete">
-                  <i className="fas fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <hr />
+
+      {!isAdmin ? (
+        <div className="admin-access">
+          <h3><span role="img" aria-label="lock">🔒</span> Admin Access</h3>
+          <label className="admin-label" htmlFor="adminPass">Enter Admin Password</label>
+          <div className="admin-input-group">
+            <input id="adminPass" type="password" placeholder="••••••••" value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)} className="admin-input" />
+            <button onClick={handleAdminLogin} className="admin-button">Login as Admin</button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="admin-header">
+            <h3>📋 All Bookings (Admin View)</h3>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+          <table className="booking-table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Date</th><th>Time</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((b) => (
+                <tr key={b._id}>
+                  <td data-label="Name">{b.name}</td>
+                  <td data-label="Email">{b.email}</td>
+                  <td data-label="Phone">{b.phone}</td>
+                  <td data-label="Service">{b.service}</td>
+                  <td data-label="Date">{b.date}</td>
+                  <td data-label="Time">{b.time}</td>
+                  <td data-label="Actions" className="actions">
+                    <button className="action-btn edit" onClick={() => handleEdit(b)} title="Edit">
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button className="action-btn delete" onClick={() => handleDelete(b._id)} title="Delete">
+                      <i className="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
     </section>
   );
 };
 
 export default Booking;
+
+
+
