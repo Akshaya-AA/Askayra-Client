@@ -81,20 +81,23 @@ const Booking = () => {
 
   const handleDelete = async (id) => {
     const confirmPassword = window.prompt("Enter admin password to delete booking:");
-
-    if (confirmPassword === null || confirmPassword === "") return;
-
-    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}?password=${confirmPassword}`, {
+  
+    if (!confirmPassword) return;
+  
+    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: confirmPassword }) // ✅ send in body!
     });
-
+  
     if (res.ok) {
       fetchBookings();
+      alert("Booking deleted successfully.");
     } else {
       alert("Invalid password or error deleting booking.");
     }
   };
+  
 
   useEffect(() => {
     fetchBookings();
