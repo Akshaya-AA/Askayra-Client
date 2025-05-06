@@ -196,4 +196,146 @@
     padding: 5px;
   }
 }
+.admin-access {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  background: #fdf8ff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(111, 66, 193, 0.1);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.admin-access h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
+
+.admin-label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  margin-left: 5px;
+  font-weight: 600;
+  color: #5e2c92;
+  font-size: 15px;
+}
+
+.admin-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-input {
+  padding: 10px 12px;
+  width: 230px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.admin-input:focus {
+  border-color: #6f42c1;
+  box-shadow: 0 0 6px rgba(111, 66, 193, 0.3);
+  outline: none;
+}
+
+.admin-button {
+  background-color: plum;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+  background-color: purple;
+}
+
+.logout-button:hover {
+  background-color: plum; 
+}
+
+@media (max-width: 768px) {
+  .logout-button {
+    font-size: 14px;  
+    padding: 8px 16px;  
+    width: 100%;  
+  }
+}
+
+@media (max-width: 480px) {
+  .logout-button {
+    font-size: 12px; 
+    padding: 6px 12px;
+  }
+}
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; 
+  gap: 10px;
+}
+
+.admin-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+  flex: 1 1 auto; 
+}
+
+.logout-button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logout-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .admin-header h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logout-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .admin-header h3 {
+    font-size: 16px;
+  }
+}
