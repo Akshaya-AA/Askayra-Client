@@ -13,11 +13,16 @@ const Booking = () => {
   const [bookings, setBookings] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [errors, setErrors] = useState({});
+  const [password, setPassword] = useState('');  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBooking({ ...booking, [name]: value });
     setErrors({ ...errors, [name]: '' });
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
   const validateForm = () => {
@@ -75,9 +80,20 @@ const Booking = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Delete this booking?')) return;
-    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}`, { method: 'DELETE' });
-    if (res.ok) fetchBookings();
+    const confirmPassword = window.prompt("Enter admin password to delete booking:");
+
+    if (confirmPassword === null || confirmPassword === "") return;
+
+    const res = await fetch(`https://askayra-server.onrender.com/api/bookings/${id}?password=${confirmPassword}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (res.ok) {
+      fetchBookings();
+    } else {
+      alert("Invalid password or error deleting booking.");
+    }
   };
 
   useEffect(() => {
