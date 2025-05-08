@@ -113,8 +113,12 @@ const Booking = () => {
   };
 
   const handleAdminLogin = () => {
-    if (!adminPassword) return alert('Please enter admin password');
-    fetchBookings().then(() => setIsAdmin(true));
+    if (adminPassword === 'askayra830') {
+      setIsAdmin(true);
+      fetchBookings();
+    } else {
+      alert('Invalid admin password');
+    }
   };
 
   const handleLogout = () => {
