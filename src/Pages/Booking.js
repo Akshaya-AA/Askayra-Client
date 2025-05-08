@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Booking.css';
 
 const Booking = () => {
@@ -41,9 +41,20 @@ const Booking = () => {
   };
 
   const fetchBookings = async () => {
-    const res = await fetch('https://askayra-server.onrender.com/api/bookings');
-    const data = await res.json();
-    setBookings(data);
+    const res = await fetch('https://askayra-server.onrender.com/api/bookings/admin-get-all', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password: adminPassword })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      setBookings(data);
+    } else {
+      alert("Failed to fetch bookings. Invalid admin access.");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -65,7 +76,7 @@ const Booking = () => {
       alert(editingId ? 'Updated!' : 'Booked!');
       setBooking({ name: '', email: '', phone: '', service: '', date: '', time: '' });
       setEditingId(null);
-      fetchBookings();
+      if (isAdmin) fetchBookings();
     } else {
       alert('Error sending data.');
     }
@@ -102,12 +113,8 @@ const Booking = () => {
   };
 
   const handleAdminLogin = () => {
-    if (adminPassword === 'askayra830') {
-      setIsAdmin(true);
-      fetchBookings();
-    } else {
-      alert('Invalid admin password');
-    }
+    if (!adminPassword) return alert('Please enter admin password');
+    fetchBookings().then(() => setIsAdmin(true));
   };
 
   const handleLogout = () => {
@@ -218,6 +225,3 @@ const Booking = () => {
 };
 
 export default Booking;
-
-
-
