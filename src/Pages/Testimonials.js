@@ -7,6 +7,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './Testimonials.css';
 
+import { useNavigate } from 'react-router-dom'; // ✅ import useNavigate
+
 import t1 from './images/t1.jpeg';
 import t2 from './images/t2.jpeg';
 import t3 from './images/t3.jpeg';
@@ -39,6 +41,8 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigation
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -81,7 +85,7 @@ const Testimonials = () => {
       <div className="testimonial-cta" data-aos="fade-up">
         <h3>Want your own beauty transformation?</h3>
         <p>Join hundreds of happy clients who trusted Askarya for their special days.</p>
-        <button className="book-btn" onClick={() => window.location.href = '/booking'}>
+        <button className="book-btn" onClick={() => navigate('/Booking')}>
           Book Your Glow-Up Now
         </button>
       </div>
