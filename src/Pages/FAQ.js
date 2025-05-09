@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './FAQ.css';
+import { useNavigate } from 'react-router-dom'; // ✅ import navigate
 
 const faqData = {
   General: [
@@ -40,6 +41,8 @@ const AccordionItem = ({ question, answer }) => {
 };
 
 const FAQ = () => {
+  const navigate = useNavigate(); // ✅ initialize navigate
+
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
@@ -63,7 +66,7 @@ const FAQ = () => {
       <div className="faq-cta" data-aos="fade-up">
         <h3>Still have questions?</h3>
         <p>Feel free to contact us directly or book a consultation.</p>
-        <button onClick={() => window.location.href = "/contact"}>Contact Us</button>
+        <button onClick={() => navigate('/Contact')}>Contact Us</button> 
       </div>
     </div>
   );
