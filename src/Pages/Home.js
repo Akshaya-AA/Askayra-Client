@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
 import slide1 from './images/slide1.jpg';
 import slide2 from './images/slide2.jpg';
@@ -22,6 +23,7 @@ import offer2 from './images/premi.jpg';
 import offer3 from './images/prof.jpg';
 
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <div className="home-carousel">
       {/* Main Carousel */}
@@ -131,8 +133,9 @@ const Home = () => {
       <section className="experience-section">
   <h6>Experience Luxury Like Never Before</h6>
   <p>Step into a world of elegance, comfort, and exclusive services tailored just for you. At Askayra, we redefine what it means to feel special.</p>
-  <a href="booking" className="book-now-btn">Book Now</a>
+  <button onClick={()=>navigate('/Booking')} class="book-now-btn">Book Now</button>
 </section>
+
 
 
     </div>

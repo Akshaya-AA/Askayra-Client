@@ -160,7 +160,7 @@ const Gallery = () => {
             breakpoints={{
               1024: { slidesPerView: 4 },
               768: { slidesPerView: 2 },
-              480: { slidesPerView: 1 },
+              0: { slidesPerView: 1 },
             }}
             className="gallery-swiper"
           >

@@ -6,7 +6,7 @@ const Contact = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
-    console.log(form.current); // ✅ This is fine here, after form has mounted
+    console.log(form.current); 
 
     emailjs.sendForm(
       "service_b55tvbe",
